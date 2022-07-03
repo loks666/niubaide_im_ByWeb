@@ -5,6 +5,7 @@ import com.niubaide.im.web.websocket.WebSocketServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +41,8 @@ public class ApiConfig {
         return new ServerBootstrap();
     }
 
+    @Autowired
+    private WebSocketChildChannelHandler webSocketChildChannelHandler;
     /**
      * 自定义的Netty Websocket服务器
      */
@@ -47,7 +50,7 @@ public class ApiConfig {
     public WebSocketServer webSocketServer(){
         WebSocketServer server = new WebSocketServer();
         server.setPort(port);
-        server.setChildChannelHandler(new WebSocketChildChannelHandler());
+        server.setChildChannelHandler(webSocketChildChannelHandler);
         return server;
     }
 }
