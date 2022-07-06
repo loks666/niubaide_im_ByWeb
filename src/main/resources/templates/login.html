@@ -52,15 +52,17 @@
                 },
                 async : false,
                 success: function(data) {
-					debugger
-					console.log("success！！！");
                     if (data.status == 200) {
-						console.log("status = 200 ！");
 						window.location.href="chatroom";
 					} else {
                         alert(data.msg);
                     }
-                }
+                },
+			error:function (data){
+				console.log("進入失敗方法!")
+				console.log(data);
+			}
+
             });
     }
     

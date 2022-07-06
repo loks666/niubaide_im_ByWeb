@@ -20,6 +20,7 @@ public class SecurityController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
+    @ResponseBody
     public ResponseJson login(HttpSession session,
                               @RequestParam String username,
                               @RequestParam String password) {
