@@ -6,8 +6,8 @@ import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.niubaide.im.model.vo.ResponseJson;
@@ -16,10 +16,9 @@ import com.niubaide.im.util.Constant;
 
 @Component
 @Sharable
+@Slf4j
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<WebSocketFrame> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketServerHandler.class);
-    
     @Autowired
     private ChatService chatService;
 
@@ -62,7 +61,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<WebSocke
 
         // 客服端发送过来的消息
         String request = ((TextWebSocketFrame)frame).text();
-        LOGGER.info("服务端收到新信息：" + request);
+        log.info("服务端收到新信息：" + request);
         JSONObject param = null;
         try {
             param = JSONObject.parseObject(request);

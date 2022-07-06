@@ -4,8 +4,8 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.util.concurrent.Future;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,9 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.0
  * @date 2018年5月18日 上午11:22:51
  */
+@Slf4j
 public class WebSocketServer implements Runnable{
 
-    private final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
 
 	@Autowired
 	private EventLoopGroup bossGroup;
@@ -53,11 +53,11 @@ public class WebSocketServer implements Runnable{
 						   .childOption(ChannelOption.RCVBUF_ALLOCATOR, new FixedRecvByteBufAllocator(592048))//配置固定长度接收缓存区分配器
 						   .childHandler(childChannelHandler); //绑定I/O事件的处理类,WebSocketChildChannelHandler中定义
 			long end = System.currentTimeMillis();
-	        logger.info("Netty Websocket服务器启动完成，耗时 " + (end - begin) + " ms，已绑定端口 " + port + " 阻塞式等候客户端连接");
+	        log.info("Netty Websocket服务器启动完成，耗时 " + (end - begin) + " ms，已绑定端口 " + port + " 阻塞式等候客户端连接");
 			
 	        serverChannelFuture = serverBootstrap.bind(port).sync();
 		} catch (Exception e) {
-		    logger.info(e.getMessage());
+		    log.info(e.getMessage());
 			bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
             e.printStackTrace();

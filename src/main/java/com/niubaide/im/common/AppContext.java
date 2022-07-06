@@ -1,7 +1,7 @@
 package com.niubaide.im.common;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,9 +14,10 @@ import javax.annotation.PreDestroy;
 
 @Component
 @Scope("singleton")
+@Slf4j
 public class AppContext {
 
-    private final Logger logger = LoggerFactory.getLogger(AppContext.class);
+    
 
     @Autowired
     private WebSocketServer webSocketServer;
@@ -36,11 +37,11 @@ public class AppContext {
     @PostConstruct
     public void init() {
         nettyThread = new Thread(webSocketServer);
-        logger.info("开启独立线程，启动Netty WebSocket服务器...");
+        log.info("开启独立线程，启动Netty WebSocket服务器...");
         nettyThread.start();
-        logger.info("加载用户数据...");
+        log.info("加载用户数据...");
         userInfoDao.loadUserInfo();
-        logger.info("加载用户交流群数据...");
+        log.info("加载用户交流群数据...");
         groupDao.loadGroupInfo();
     }
 
@@ -52,10 +53,10 @@ public class AppContext {
     @SuppressWarnings("deprecation")
     @PreDestroy
     public void close() {
-        logger.info("正在释放Netty Websocket相关连接...");
+        log.info("正在释放Netty Websocket相关连接...");
         webSocketServer.close();
-        logger.info("正在关闭Netty Websocket服务器线程...");
+        log.info("正在关闭Netty Websocket服务器线程...");
         nettyThread.stop();
-        logger.info("系统成功关闭！");
+        log.info("系统成功关闭！");
     }
 }

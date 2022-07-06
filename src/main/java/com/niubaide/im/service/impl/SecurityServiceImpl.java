@@ -1,7 +1,7 @@
 package com.niubaide.im.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.niubaide.im.dao.UserInfoDao;
@@ -14,14 +14,13 @@ import javax.servlet.http.HttpSession;
 import java.text.MessageFormat;
 
 @Service
+@Slf4j
 public class SecurityServiceImpl implements SecurityService{
 
     @Autowired
     private UserInfoDao userInfoDao;
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityServiceImpl.class);
-    
-    
+
     @Override
     public ResponseJson login(String username, String password, HttpSession session) {
         UserInfo userInfo = userInfoDao.getByUsername(username);
@@ -42,7 +41,7 @@ public class SecurityServiceImpl implements SecurityService{
             return new ResponseJson().error("请先登录！");
         }
         session.removeAttribute(Constant.USER_TOKEN);
-        LOGGER.info(MessageFormat.format("userId为 {0} 的用户已注销登录!", userId));
+        log.info(MessageFormat.format("userId为 {0} 的用户已注销登录!", userId));
         return new ResponseJson().success();
     }
 

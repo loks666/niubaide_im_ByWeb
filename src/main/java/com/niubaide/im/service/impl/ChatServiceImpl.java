@@ -3,8 +3,8 @@ package com.niubaide.im.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.niubaide.im.dao.GroupInfoDao;
@@ -19,10 +19,9 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 @Service
+@Slf4j
 public class ChatServiceImpl implements ChatService{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ChatServiceImpl.class);
-            
     @Autowired
     private GroupInfoDao groupDao;
     
@@ -34,7 +33,7 @@ public class ChatServiceImpl implements ChatService{
                 .setData("type", ChatType.REGISTER)
                 .toString();
         sendMessage(ctx, responseJson);
-        LOGGER.info(MessageFormat.format("userId为 {0} 的用户登记到在线用户表，当前在线人数为：{1}"
+        log.info(MessageFormat.format("userId为 {0} 的用户登记到在线用户表，当前在线人数为：{1}"
                 , userId, Constant.onlineUserMap.size()));
     }
 
@@ -107,12 +106,12 @@ public class ChatServiceImpl implements ChatService{
         while(iterator.hasNext()) {
             Entry<String, ChannelHandlerContext> entry = iterator.next();
             if (entry.getValue() == ctx) {
-                LOGGER.info("正在移除握手实例...");
+                log.info("正在移除握手实例...");
                 Constant.webSocketHandshakerMap.remove(ctx.channel().id().asLongText());
-                LOGGER.info(MessageFormat.format("已移除握手实例，当前握手实例总数为：{0}"
+                log.info(MessageFormat.format("已移除握手实例，当前握手实例总数为：{0}"
                         , Constant.webSocketHandshakerMap.size()));
                 iterator.remove();
-                LOGGER.info(MessageFormat.format("userId为 {0} 的用户已退出聊天，当前在线人数为：{1}"
+                log.info(MessageFormat.format("userId为 {0} 的用户已退出聊天，当前在线人数为：{1}"
                         , entry.getKey(), Constant.onlineUserMap.size()));
                 break;
             }
