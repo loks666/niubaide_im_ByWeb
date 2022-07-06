@@ -17,10 +17,11 @@ public class UserAuthInteceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object userToken = session.getAttribute(Constant.USER_TOKEN);
         if (userToken == null) {
-            response.sendRedirect("toLogin");
+            response.sendRedirect("/toLogin");
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     @Override

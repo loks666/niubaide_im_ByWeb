@@ -21,8 +21,6 @@ public class ChatroomController {
 
     /**
      * 描述：登录成功跳转页面后，调用此接口获取用户信息
-     * @param userId
-     * @return
      */
     @RequestMapping(value = "/get_userinfo", method = RequestMethod.POST) 
     @ResponseBody
