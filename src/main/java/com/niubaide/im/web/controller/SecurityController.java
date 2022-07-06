@@ -14,23 +14,24 @@ public class SecurityController {
     @Autowired
     SecurityService securityService;
 
-    @GetMapping(value = {"login", "/"})
+    @RequestMapping(value = {"toLogin", "/"}, method = RequestMethod.GET)
     public String toLogin() {
         return "login";
     }
 
-    @PostMapping(value = "login")
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ResponseJson login(HttpSession session,
                               @RequestParam String username,
                               @RequestParam String password) {
         return securityService.login(username, password, session);
     }
+
     /**
      * 描述：登录成功后，调用此接口进行页面跳转
+     *
      * @return
      */
-    @GetMapping(value = {"chatroom", "/"})
-//    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "chatroom", method = RequestMethod.GET)
     public String toChatroom() {
         return "chatroom";
     }

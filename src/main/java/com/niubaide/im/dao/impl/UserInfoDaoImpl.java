@@ -55,15 +55,15 @@ public class UserInfoDaoImpl implements UserInfoDao {
         userInfo8.setGroupList(groupList);
         userInfo9.setGroupList(groupList);
         
-        Constant.userInfoMap.put("Member001", userInfo);
-        Constant.userInfoMap.put("Member002", userInfo2);
-        Constant.userInfoMap.put("Member003", userInfo3);
-        Constant.userInfoMap.put("Member004", userInfo4);
-        Constant.userInfoMap.put("Member005", userInfo5);
-        Constant.userInfoMap.put("Member006", userInfo6);
-        Constant.userInfoMap.put("Member007", userInfo7);
-        Constant.userInfoMap.put("Member008", userInfo8);
-        Constant.userInfoMap.put("Member009", userInfo9);
+        Constant.userInfoMap.put("001", userInfo);
+        Constant.userInfoMap.put("002", userInfo2);
+        Constant.userInfoMap.put("003", userInfo3);
+        Constant.userInfoMap.put("004", userInfo4);
+        Constant.userInfoMap.put("005", userInfo5);
+        Constant.userInfoMap.put("006", userInfo6);
+        Constant.userInfoMap.put("007", userInfo7);
+        Constant.userInfoMap.put("008", userInfo8);
+        Constant.userInfoMap.put("009", userInfo9);
     }
 
     @Override

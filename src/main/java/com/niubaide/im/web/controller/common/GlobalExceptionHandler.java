@@ -95,6 +95,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ResponseJson methodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException exception) {
+        System.out.println(exception);
         String supportedMethods = exception.getSupportedHttpMethods().stream()
                 .map(method -> method.toString())
                 .collect(Collectors.joining("/"));
