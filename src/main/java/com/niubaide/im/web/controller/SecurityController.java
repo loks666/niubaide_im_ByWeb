@@ -16,7 +16,7 @@ public class SecurityController {
 
     @RequestMapping(value = {"toLogin", "/"}, method = RequestMethod.GET)
     public String toLogin() {
-        return "login";
+        return "login.html?v1";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
