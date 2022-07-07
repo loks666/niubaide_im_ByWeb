@@ -25,7 +25,7 @@ public class NiubaideWebAppConfigurer extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/js/**")
                 .excludePathPatterns("/css/**")
-                .excludePathPatterns("/img/*")
+                .excludePathPatterns("/img/**")
                 .excludePathPatterns("/toLogin");
         super.addInterceptors(registry);
     }
