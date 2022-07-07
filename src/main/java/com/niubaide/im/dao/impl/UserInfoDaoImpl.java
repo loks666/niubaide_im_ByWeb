@@ -1,11 +1,13 @@
 package com.niubaide.im.dao.impl;
 
-import org.springframework.stereotype.Repository;
 import com.niubaide.im.dao.UserInfoDao;
 import com.niubaide.im.model.po.GroupInfo;
 import com.niubaide.im.model.po.UserInfo;
 import com.niubaide.im.util.Constant;
+import org.springframework.stereotype.Repository;
 
+import java.text.DecimalFormat;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,50 +22,20 @@ public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public void loadUserInfo() {
         // 设置用户基本信息，共9个用户
-        UserInfo userInfo = new UserInfo("001", "001", "001", "img/avatar/Member001.jpg");
-        UserInfo userInfo2 = new UserInfo("002", "002", "002", "img/avatar/Member002.jpg");
-        UserInfo userInfo3 = new UserInfo("003", "003", "003", "img/avatar/Member003.jpg");
-        UserInfo userInfo4 = new UserInfo("004", "004", "004", "img/avatar/Member004.jpg");
-        UserInfo userInfo5 = new UserInfo("005", "005", "005", "img/avatar/Member005.jpg");
-        UserInfo userInfo6 = new UserInfo("006", "006", "006", "img/avatar/Member006.jpg");
-        UserInfo userInfo7 = new UserInfo("007", "007", "007", "img/avatar/Member007.jpg");
-        UserInfo userInfo8 = new UserInfo("008", "008", "008", "img/avatar/Member008.jpg");
-        UserInfo userInfo9 = new UserInfo("009", "009", "009", "img/avatar/Member009.jpg");
+        List<UserInfo> userInfos = generateUserInfo(9);
+        userInfos.forEach(userInfo -> {
+            // 设置用户好友列表
+            userInfo.setFriendList(generateFriendList(userInfo.getUserId()));
 
-        // 设置用户好友列表
-        userInfo.setFriendList(generateFriendList("001"));
-        userInfo2.setFriendList(generateFriendList("002"));
-        userInfo3.setFriendList(generateFriendList("003"));
-        userInfo4.setFriendList(generateFriendList("004"));
-        userInfo5.setFriendList(generateFriendList("005"));
-        userInfo6.setFriendList(generateFriendList("006"));
-        userInfo7.setFriendList(generateFriendList("007"));
-        userInfo8.setFriendList(generateFriendList("008"));
-        userInfo9.setFriendList(generateFriendList("009"));
+            // 设置用户群列表，共1个群
+            GroupInfo groupInfo = new GroupInfo("01", "Group01", "img/avatar/Group01.jpg", null);
+            List<GroupInfo> groupList = new ArrayList<>();
+            groupList.add(groupInfo);
+            userInfo.setGroupList(groupList);
 
-        // 设置用户群列表，共1个群
-        GroupInfo groupInfo = new GroupInfo("01", "Group01", "img/avatar/Group01.jpg", null);
-        List<GroupInfo> groupList = new ArrayList<GroupInfo>();
-        groupList.add(groupInfo);
-        userInfo.setGroupList(groupList);
-        userInfo2.setGroupList(groupList);
-        userInfo3.setGroupList(groupList);
-        userInfo4.setGroupList(groupList);
-        userInfo5.setGroupList(groupList);
-        userInfo6.setGroupList(groupList);
-        userInfo7.setGroupList(groupList);
-        userInfo8.setGroupList(groupList);
-        userInfo9.setGroupList(groupList);
-
-        Constant.userInfoMap.put("001", userInfo);
-        Constant.userInfoMap.put("002", userInfo2);
-        Constant.userInfoMap.put("003", userInfo3);
-        Constant.userInfoMap.put("004", userInfo4);
-        Constant.userInfoMap.put("005", userInfo5);
-        Constant.userInfoMap.put("006", userInfo6);
-        Constant.userInfoMap.put("007", userInfo7);
-        Constant.userInfoMap.put("008", userInfo8);
-        Constant.userInfoMap.put("009", userInfo9);
+            // 將用戶添加到用戶表
+            Constant.userInfoMap.put(userInfo.getUserId(), userInfo);
+        });
     }
 
     @Override
@@ -86,25 +58,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
 
     private List<UserInfo> generateFriendList(String userId) {
-        UserInfo userInfo = new UserInfo("001", "Member001", "001", "img/avatar/Member001.jpg");
-        UserInfo userInfo2 = new UserInfo("002", "Member002", "002", "img/avatar/Member002.jpg");
-        UserInfo userInfo3 = new UserInfo("003", "Member003", "003", "img/avatar/Member003.jpg");
-        UserInfo userInfo4 = new UserInfo("004", "Member004", "004", "img/avatar/Member004.jpg");
-        UserInfo userInfo5 = new UserInfo("005", "Member005", "005", "img/avatar/Member005.jpg");
-        UserInfo userInfo6 = new UserInfo("006", "Member006", "006", "img/avatar/Member006.jpg");
-        UserInfo userInfo7 = new UserInfo("007", "Member007", "007", "img/avatar/Member007.jpg");
-        UserInfo userInfo8 = new UserInfo("008", "Member008", "008", "img/avatar/Member008.jpg");
-        UserInfo userInfo9 = new UserInfo("009", "Member009", "009", "img/avatar/Member009.jpg");
-        List<UserInfo> friendList = new ArrayList<UserInfo>();
-        friendList.add(userInfo);
-        friendList.add(userInfo2);
-        friendList.add(userInfo3);
-        friendList.add(userInfo4);
-        friendList.add(userInfo5);
-        friendList.add(userInfo6);
-        friendList.add(userInfo7);
-        friendList.add(userInfo8);
-        friendList.add(userInfo9);
+        List<UserInfo> friendList = generateUserInfo(10);
         Iterator<UserInfo> iterator = friendList.iterator();
         while (iterator.hasNext()) {
             UserInfo entry = iterator.next();
@@ -113,6 +67,29 @@ public class UserInfoDaoImpl implements UserInfoDao {
             }
         }
         return friendList;
+    }
+
+    private List<UserInfo> generateUserInfo(int num) {
+        List<UserInfo> friendList = new ArrayList<>();
+        for (int i = 1; i <= num; i++) {
+            String userPre = "{0}";
+            String userNamePre = "Member{0}";
+            String passPre = "{0}";
+            String avaUrlPre = "img/avatar/Member{0}.jpg";
+            UserInfo userInfo = new UserInfo(
+                    format(userPre, i),
+                    format(userNamePre, i),
+                    format(passPre, i),
+                    format(avaUrlPre, i));
+            System.out.println(userInfo);
+            friendList.add(userInfo);
+        }
+        return friendList;
+    }
+
+    private String format(String source, int target) {
+        DecimalFormat complement = new DecimalFormat("000");
+        return MessageFormat.format(source, complement.format(target));
     }
 
 

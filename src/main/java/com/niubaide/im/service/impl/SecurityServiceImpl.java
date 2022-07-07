@@ -15,11 +15,11 @@ import java.text.MessageFormat;
 
 @Service
 @Slf4j
-public class SecurityServiceImpl implements SecurityService{
+public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     private UserInfoDao userInfoDao;
-    
+
 
     @Override
     public ResponseJson login(String username, String password, HttpSession session) {

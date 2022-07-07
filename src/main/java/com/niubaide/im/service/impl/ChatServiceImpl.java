@@ -20,14 +20,14 @@ import java.util.Map.Entry;
 
 @Service
 @Slf4j
-public class ChatServiceImpl implements ChatService{
+public class ChatServiceImpl implements ChatService {
 
     @Autowired
     private GroupInfoDao groupDao;
-    
+
     @Override
     public void register(JSONObject param, ChannelHandlerContext ctx) {
-        String userId = (String)param.get("userId");
+        String userId = (String) param.get("userId");
         Constant.onlineUserMap.put(userId, ctx);
         String responseJson = new ResponseJson().success()
                 .setData("type", ChatType.REGISTER)
@@ -39,9 +39,9 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public void singleSend(JSONObject param, ChannelHandlerContext ctx) {
-        String fromUserId = (String)param.get("fromUserId");
-        String toUserId = (String)param.get("toUserId");
-        String content = (String)param.get("content");
+        String fromUserId = (String) param.get("fromUserId");
+        String toUserId = (String) param.get("toUserId");
+        String content = (String) param.get("content");
         ChannelHandlerContext toUserCtx = Constant.onlineUserMap.get(toUserId);
         if (toUserCtx == null) {
             String responseJson = new ResponseJson()
@@ -60,10 +60,10 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public void groupSend(JSONObject param, ChannelHandlerContext ctx) {
-        
-        String fromUserId = (String)param.get("fromUserId");
-        String toGroupId = (String)param.get("toGroupId");
-        String content = (String)param.get("content");
+
+        String fromUserId = (String) param.get("fromUserId");
+        String toGroupId = (String) param.get("toGroupId");
+        String content = (String) param.get("content");
         
         /*String userId = (String)param.get("userId");
         String fromUsername = (String)param.get("fromUsername");*/
@@ -90,20 +90,20 @@ public class ChatServiceImpl implements ChatService{
                     .setData("type", ChatType.GROUP_SENDING)
                     .toString();
             groupInfo.getMembers().stream()
-                .forEach(member -> { 
-                    ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
-                    if (toCtx != null && !member.getUserId().equals(fromUserId)) {
-                        sendMessage(toCtx, responseJson);
-                    }
-                });
+                    .forEach(member -> {
+                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
+                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
+                            sendMessage(toCtx, responseJson);
+                        }
+                    });
         }
     }
-    
+
     @Override
     public void remove(ChannelHandlerContext ctx) {
-        Iterator<Entry<String, ChannelHandlerContext>> iterator = 
+        Iterator<Entry<String, ChannelHandlerContext>> iterator =
                 Constant.onlineUserMap.entrySet().iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Entry<String, ChannelHandlerContext> entry = iterator.next();
             if (entry.getValue() == ctx) {
                 log.info("正在移除握手实例...");
@@ -120,11 +120,11 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public void FileMsgSingleSend(JSONObject param, ChannelHandlerContext ctx) {
-        String fromUserId = (String)param.get("fromUserId");
-        String toUserId = (String)param.get("toUserId");
-        String originalFilename = (String)param.get("originalFilename");
-        String fileSize = (String)param.get("fileSize");
-        String fileUrl = (String)param.get("fileUrl");
+        String fromUserId = (String) param.get("fromUserId");
+        String toUserId = (String) param.get("toUserId");
+        String originalFilename = (String) param.get("originalFilename");
+        String fileSize = (String) param.get("fileSize");
+        String fileUrl = (String) param.get("fileUrl");
         ChannelHandlerContext toUserCtx = Constant.onlineUserMap.get(toUserId);
         if (toUserCtx == null) {
             String responseJson = new ResponseJson()
@@ -145,11 +145,11 @@ public class ChatServiceImpl implements ChatService{
 
     @Override
     public void FileMsgGroupSend(JSONObject param, ChannelHandlerContext ctx) {
-        String fromUserId = (String)param.get("fromUserId");
-        String toGroupId = (String)param.get("toGroupId");
-        String originalFilename = (String)param.get("originalFilename");
-        String fileSize = (String)param.get("fileSize");
-        String fileUrl = (String)param.get("fileUrl");
+        String fromUserId = (String) param.get("fromUserId");
+        String toGroupId = (String) param.get("toGroupId");
+        String originalFilename = (String) param.get("originalFilename");
+        String fileSize = (String) param.get("fileSize");
+        String fileUrl = (String) param.get("fileUrl");
         GroupInfo groupInfo = groupDao.getByGroupId(toGroupId);
         if (groupInfo == null) {
             String responseJson = new ResponseJson().error("该群id不存在").toString();
@@ -164,15 +164,15 @@ public class ChatServiceImpl implements ChatService{
                     .setData("type", ChatType.FILE_MSG_GROUP_SENDING)
                     .toString();
             groupInfo.getMembers().stream()
-                .forEach(member -> { 
-                    ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
-                    if (toCtx != null && !member.getUserId().equals(fromUserId)) {
-                        sendMessage(toCtx, responseJson);
-                    }
-                });
+                    .forEach(member -> {
+                        ChannelHandlerContext toCtx = Constant.onlineUserMap.get(member.getUserId());
+                        if (toCtx != null && !member.getUserId().equals(fromUserId)) {
+                            sendMessage(toCtx, responseJson);
+                        }
+                    });
         }
     }
-    
+
     @Override
     public void typeError(ChannelHandlerContext ctx) {
         String responseJson = new ResponseJson()
@@ -180,13 +180,11 @@ public class ChatServiceImpl implements ChatService{
                 .toString();
         sendMessage(ctx, responseJson);
     }
-    
 
-    
+
     private void sendMessage(ChannelHandlerContext ctx, String message) {
         ctx.channel().writeAndFlush(new TextWebSocketFrame(message));
     }
 
-   
-    
+
 }

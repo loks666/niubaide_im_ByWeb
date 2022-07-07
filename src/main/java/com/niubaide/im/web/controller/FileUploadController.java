@@ -1,14 +1,13 @@
 package com.niubaide.im.web.controller;
 
+import com.niubaide.im.model.vo.ResponseJson;
+import com.niubaide.im.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.niubaide.im.model.vo.ResponseJson;
-import com.niubaide.im.service.FileUploadService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,9 +19,9 @@ public class FileUploadController {
 
     @Autowired
     private FileUploadService fileUploadService;
-    
+
     @RequestMapping(value = "/upload", method = POST)
-    @ResponseBody 
+    @ResponseBody
     public ResponseJson upload(
             @RequestParam(value = "file", required = true) MultipartFile file, HttpServletRequest request) {
         return fileUploadService.upload(file, request);

@@ -5,13 +5,13 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
+public class NiubaideWebAppConfigurer extends WebMvcConfigurerAdapter {
 
     // 这么写的目的是为了在SessionInterceptor中能注入spring中的service
 
     private final UserAuthInteceptor userAuthInteceptor;
 
-    public MyWebAppConfigurer(UserAuthInteceptor userAuthInteceptor) {
+    public NiubaideWebAppConfigurer(UserAuthInteceptor userAuthInteceptor) {
         this.userAuthInteceptor = userAuthInteceptor;
     }
 
