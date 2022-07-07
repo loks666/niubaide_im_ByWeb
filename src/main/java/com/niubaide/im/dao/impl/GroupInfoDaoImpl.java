@@ -23,6 +23,7 @@ public class GroupInfoDaoImpl implements GroupInfoDao {
         UserInfo userInfo7 = new UserInfo("007", "Member007", "007", "img/avatar/Member007.jpg");
         UserInfo userInfo8 = new UserInfo("008", "Member008", "008", "img/avatar/Member008.jpg");
         UserInfo userInfo9 = new UserInfo("009", "Member009", "009", "img/avatar/Member009.jpg");
+        UserInfo userInfo10 = new UserInfo("010", "Member010", "010", "img/avatar/Member010.jpg");
         List<UserInfo> members = new ArrayList<UserInfo>();
         members.add(userInfo);
         members.add(userInfo2);
@@ -33,6 +34,7 @@ public class GroupInfoDaoImpl implements GroupInfoDao {
         members.add(userInfo7);
         members.add(userInfo8);
         members.add(userInfo9);
+        members.add(userInfo10);
         GroupInfo groupInfo = new GroupInfo("01", "Group01", "img/avatar/Group01.jpg", members);
         Constant.groupInfoMap.put(groupInfo.getGroupId(), groupInfo);
     }

@@ -81,7 +81,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
                     format(userNamePre, i),
                     format(passPre, i),
                     format(avaUrlPre, i));
-            System.out.println(userInfo);
             friendList.add(userInfo);
         }
         return friendList;
