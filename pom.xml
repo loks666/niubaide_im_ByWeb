@@ -6,10 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.niubaide</groupId>
-    <artifactId>niubaide_im_ByWeb</artifactId>
+    <artifactId>niubaide_im_by_web</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>niubaide_im_ByWeb</name>
     <description>niubaide_im_ByWeb</description>
@@ -17,6 +18,7 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.12.RELEASE</spring.version>
+        <spring.boot.version>2.7.1</spring.boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -88,10 +90,14 @@
     </dependencies>
 
     <build>
+        <!-- 引用我们的项目名字 -->
+        <finalName>${project.artifactId}</finalName>
+        
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -101,6 +107,55 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--使用docker-maven-plugin插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <!--将插件绑定在某个phase执行-->
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <!--用户只需执行mvn package ，就会自动执行mvn docker:build-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--指定生成的镜像名-->
+                    <imageName>wolf/${project.artifactId}</imageName>
+                    <!--指定标签 这里指定的是镜像的版本，我们默认版本是latest-->
+                    <imageTags>
+                        <imageTag>latest</imageTag>
+                    </imageTags>
+                    <!--指定基础镜像jdk1.8-->
+                    <baseImage>java</baseImage>
+                    <!-- 镜像制作人本人信息 -->
+                    <maintainer>github:loks666</maintainer>
+                    <!--切换到ROOT目录-->
+                    <workdir>/ROOT</workdir>
+                    <!--查看我们的java版本-->
+                    <cmd>["java", "-version"]</cmd>
+                    <!--${project.build.finalName}.jar是打包后生成的jar包的名字-->
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <!--指定远程 docker api地址-->
+                    <dockerHost>http://81.68.219.235:2375</dockerHost>
+                    <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <!--jar 包所在的路径  此处配置的 即对应 target 目录-->
+                            <directory>${project.build.directory}/</directory>
+                            <!--用于指定需要复制的文件 需要包含的 jar包 ，这里对应的是 Dockerfile中添加的文件名　-->
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    
+                </configuration>
+            </plugin>
+            
         </plugins>
     </build>
 
