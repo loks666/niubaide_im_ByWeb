@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>小小的聊天室——登录</title>
+    <title>牛掰的聊天室——登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords"
@@ -47,6 +47,13 @@
 </div>
 </body>
 <script type="text/javascript">
+    window.onload = function () {
+        alert("有10位用戶，自动初始化好友列表，用户名与密码一致\n" +
+            "用户1:001 密码：001\n" +
+            "用户2:002 密码：002... 以此类推\n" +
+            "请注意：用户发送消息必须对方在线，否则消息发送失败")
+    }
+
     function login() {
         $.ajax({
             type: 'POST',
