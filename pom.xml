@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.12.RELEASE</spring.version>
         <spring.boot.version>2.7.1</spring.boot.version>
+        <!--    docker远程部署ip地址    -->
+        <docker.host>https://ip:port</docker.host>
     </properties>
     <dependencies>
         <dependency>
@@ -98,7 +100,7 @@
     <build>
         <!-- 引用我们的项目名字 -->
         <finalName>${project.artifactId}</finalName>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -147,7 +149,7 @@
                     <!--${project.build.finalName}.jar是打包后生成的jar包的名字-->
                     <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
                     <!--指定远程 docker api地址-->
-                    <dockerHost>http://81.68.219.235:2375</dockerHost>
+                    <dockerHost>${docker.host}</dockerHost>
                     <!-- 这里是复制 jar 包到 docker 容器指定目录配置 -->
                     <resources>
                         <resource>
@@ -158,10 +160,10 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    
+
                 </configuration>
             </plugin>
-            
+
         </plugins>
     </build>
 
