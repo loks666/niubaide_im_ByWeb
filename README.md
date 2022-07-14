@@ -70,7 +70,7 @@
 基础沿用 [Kanarienvogels/Chatroom](https://github.com/Kanarienvogels/Chatroom) 项目设计，功能未做明显改动
 
 ### 2.2 系统结构
-  HTML > 构建websocket对象 > 与服务器请求连接 > 开发发送消息
+  HTML > 构建websocket对象 > 与服务器请求连接 > 开始发送消息
 ### 2.3 项目结构
 项目后端结构：
 ![项目结构（后端）](http://tva1.sinaimg.cn/large/ed264f1bgy1h46idstqt1j20fb120dmr.jpg)
