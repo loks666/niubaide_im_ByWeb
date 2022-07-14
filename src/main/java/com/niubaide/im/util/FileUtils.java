@@ -18,7 +18,7 @@ import java.util.HashMap;
  * 3. 高效的将文件转换成字节数组
  * </p>
  *
- * @author Kanarien
+ * @author Loks666
  * @version 1.0
  * @date 2017年11月15日 下午9:05:10
  */
