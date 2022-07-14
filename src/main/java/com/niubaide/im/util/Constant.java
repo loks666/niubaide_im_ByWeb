@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * 4. groupInfo表，用groupId为键，存放群信息；
  * 5. userInfo表，用username为键，存放用户信息。
  *
- * @author Kanarien
+ * @author Loks666
  * @version 1.0
  * @date 2018年5月18日 下午9:17:35
  */

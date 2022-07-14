@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * 描述: 全局错误统一处理控制中心
  *
- * @author Kanarien
+ * @author Loks666
  * @version 1.0
  * @date 2018年5月17日 下午3:27:49
  */
