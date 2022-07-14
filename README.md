@@ -1,4 +1,4 @@
-# 互联网实时聊天系统 (Spring + Netty + Websocket + docker)
+# web即时通讯系统 (Spring + Netty + Websocket + docker)
 
 
 - 本项目重构于[Kanarienvogels/Chatroom](https://github.com/Kanarienvogels/Chatroom "Kanarienvogels/Chatroom")即时通讯系统
@@ -157,9 +157,6 @@ public class WebSocketServer implements Runnable{
 
 ### 4.2 聊天演示
 ![聊天演示](http://tva1.sinaimg.cn/large/ed264f1bgy1h46jtvn8qng20rd0jw4lj.gif)
-
-### 4.3 在线体验地址
-牛掰的聊天室：[http://im.superxiang.com/](http://im.superxiang.com/)  
 
 ---
 ### 注意事项  ##
