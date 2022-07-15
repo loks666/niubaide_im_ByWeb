@@ -43,7 +43,7 @@
 但是由于随着技术发展，Kanarienvogels采用的SSM框架显得有些过时，再加上[niubaide_im](https://github.com/loks666/niubaide_im)使用uniapp构建的前端，对于学习或者希望尽快看到效果的朋友不是很友好，所以有了重构的想法，最终经过一段时间的不懈努力。。。  
 本项目就横空出世啦！！！  
 - 它改进了什么？
-> 采用SpringBoot + thymeleaf 开发，docker容器化部署，极速开发，极其部署
+> 采用SpringBoot + thymeleaf 开发，docker容器化部署，极速开发，极易部署
 - 演示地址
 > [牛掰的聊天室 (http://im.superxiang.com)](http://im.superxiang.com)
 - 关于学习netty的书籍
