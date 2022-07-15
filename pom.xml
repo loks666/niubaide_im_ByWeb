@@ -20,7 +20,7 @@
         <spring.version>4.3.12.RELEASE</spring.version>
         <spring.boot.version>2.7.1</spring.boot.version>
         <!--    docker远程部署ip地址    -->
-        <docker.host>https://ip:port</docker.host>
+        <docker.host>http://1.117.97.122:7366</docker.host>
     </properties>
     <dependencies>
         <dependency>

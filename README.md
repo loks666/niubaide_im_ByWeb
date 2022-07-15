@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://github.com/loks666/niubaide_im_ByWeb/">
-    <img src="http://tva1.sinaimg.cn/large/ed264f1bgy1h46fyw6hgjj20dw0azaas.jpg" alt="Logo" width="80" height="80">
+    <img src="http://tva1.sinaimg.cn/large/ed264f1bgy1h47ec7fwz8j20sg0sgh1v.jpg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">niubaide_im_ByWeb</h3>
