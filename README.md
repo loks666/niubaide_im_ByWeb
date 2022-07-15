@@ -51,8 +51,8 @@
 - 关联项目
 > [使用uniapp + springBoot构建的即使通讯系统](https://github.com/loks666/niubaide_im)  
 - 主要区别
-> 本项目目前未使用数据库，SrpingBoot或dacker一体化部署，同时后台内置好用户信息
-> niubaide_im已经实现数据库，同时含有用户添加功能
+> - 本项目目前未使用数据库，使用SrpingBoot或dacker一体化部署，同时后台内置好用户信息  
+> - niubaide_im已经实现数据库，同时含有用户添加功能
 
 ## 1. 技术准备（自己熟悉即可）
 * IDE：IDEA 2022
