@@ -48,9 +48,11 @@
 > [牛掰的聊天室 (http://im.superxiang.com)](http://im.superxiang.com)
 - 关于学习netty的书籍
 > [Essential Netty in Action 《Netty 实战(精髓)》](https://legacy.gitbook.com/book/waylau/essential-netty-in-action/details)  
-- 关联项目区别
+- 关联项目
 > [使用uniapp + springBoot构建的即使通讯系统](https://github.com/loks666/niubaide_im)  
-> 主要区别为本项目目前未使用数据库，在niubaide_im已经实现数据库，同时含有用户添加功能(本项目目前为后台内置好用户信息)
+- 主要区别
+> - 本项目目前未使用数据库，使用SrpingBoot或dacker一体化部署，同时后台内置好用户信息  
+> - niubaide_im已经实现数据库，同时含有用户添加功能
 
 ## 1. 技术准备（自己熟悉即可）
 * IDE：IDEA 2022
