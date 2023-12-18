@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>牛掰的聊天室</title>
@@ -135,7 +135,7 @@
         window.WebSocket = window.MozWebSocket;
     }
     if (window.WebSocket) {
-        socket = new WebSocket("ws://1.117.97.122:3001");
+        socket = new WebSocket("ws://localhost:3001");
         // socket = new WebSocket("ws://localhost:3001");
         socket.onmessage = function (event) {
             var json = JSON.parse(event.data);

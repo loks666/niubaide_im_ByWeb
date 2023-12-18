@@ -29,6 +29,13 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -133,7 +140,7 @@
                 </executions>
                 <configuration>
                     <!--指定生成的镜像名-->
-                    <imageName>wolf/${project.artifactId}</imageName>
+                    <imageName>loks666/${project.artifactId}</imageName>
                     <!--指定标签 这里指定的是镜像的版本，我们默认版本是latest-->
                     <imageTags>
                         <imageTag>latest</imageTag>
